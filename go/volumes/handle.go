@@ -21,11 +21,11 @@ func Handle(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 	path := q[1]
 
 	if action == "v" {
-		content, err := ioutil.ReadFile(path)
+		b, err := ioutil.ReadFile(path)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error reading file: %v", err)
 		}
-		_, err = fmt.Fprintf(res, "%v", content)
+		_, err = fmt.Fprintf(res, "%v", string(b))
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error on response write: %v", err)
 		}
